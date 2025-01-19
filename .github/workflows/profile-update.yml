@@ -15,7 +15,7 @@ jobs:
       - name: Fetch YouTube Videos
         uses: gautamkrishnar/blog-post-workflow@master
         with:
-          feed_list: "https://www.youtube.com/feeds/videos.xml?channel_id=sampassmore"
+          feed_list: "https://www.youtube.com/feeds/videos.xml?channel_id=UCzOwC8M97mSw6oXqFnMDX8A"
           max_post_count: 5
           template: "- 🎥 [$title]($url)"
           comment_tag_name: "YOUTUBE-VIDEOS"
