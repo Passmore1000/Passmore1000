@@ -4,25 +4,26 @@ import re
 
 def update_readme_with_tweets():
     try:
-        # Twitter API v2 authentication
+        # Use Bearer Token authentication
         client = tweepy.Client(
-            consumer_key=os.environ['TWITTER_API_KEY'],
-            consumer_secret=os.environ['TWITTER_API_SECRET'],
-            access_token=os.environ['TWITTER_ACCESS_TOKEN'],
-            access_token_secret=os.environ['TWITTER_ACCESS_SECRET']
+            bearer_token=os.environ['TWITTER_BEARER_TOKEN']
         )
         
-        # Get authenticated user's ID
-        me = client.get_me()
-        user_id = me.data.id
-        username = me.data.username
-        print(f"Authenticated as: {username}")
+        # Get user ID by username
+        user = client.get_user(username="samrpassmore")
+        if not user.data:
+            print("Could not find user")
+            return
+            
+        user_id = user.data.id
+        print(f"Found user ID: {user_id}")
         
-        # Get tweets using v2 endpoint
+        # Get tweets
         tweets = client.get_users_tweets(
             id=user_id,
             max_results=5,
-            exclude=['retweets', 'replies']
+            exclude=['retweets', 'replies'],
+            tweet_fields=['text', 'created_at']
         )
         
         if not tweets.data:
@@ -39,7 +40,7 @@ def update_readme_with_tweets():
             text = re.sub(r'https://\S+', '', text)
             text = re.sub(r'@\w+', '', text)
             text = ' '.join(text.split())
-            tweet_url = f"https://twitter.com/{username}/status/{tweet.id}"
+            tweet_url = f"https://twitter.com/samrpassmore/status/{tweet.id}"
             tweet_lines.append(f"- [{text}]({tweet_url})")
         
         # Read and update README
