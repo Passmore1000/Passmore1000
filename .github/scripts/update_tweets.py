@@ -4,30 +4,37 @@ import re
 
 def update_readme_with_tweets():
     try:
-        # Twitter API v1.1 authentication
-        auth = tweepy.OAuth1UserHandler(
-            os.environ['TWITTER_API_KEY'],
-            os.environ['TWITTER_API_SECRET'],
-            os.environ['TWITTER_ACCESS_TOKEN'],
-            os.environ['TWITTER_ACCESS_SECRET']
+        # Twitter API v2 authentication
+        client = tweepy.Client(
+            consumer_key=os.environ['TWITTER_API_KEY'],
+            consumer_secret=os.environ['TWITTER_API_SECRET'],
+            access_token=os.environ['TWITTER_ACCESS_TOKEN'],
+            access_token_secret=os.environ['TWITTER_ACCESS_SECRET']
         )
         
-        # Create API object
-        api = tweepy.API(auth)
-        
-        # Verify credentials and get username
-        me = api.verify_credentials()
-        username = me.screen_name
+        # Get authenticated user's ID
+        me = client.get_me()
+        user_id = me.data.id
+        username = me.data.username
         print(f"Authenticated as: {username}")
         
-        # Get tweets from user's timeline
-        tweets = api.user_timeline(screen_name=username, count=5, tweet_mode="extended")
-        print(f"Found {len(tweets)} tweets")
+        # Get tweets using v2 endpoint
+        tweets = client.get_users_tweets(
+            id=user_id,
+            max_results=5,
+            exclude=['retweets', 'replies']
+        )
+        
+        if not tweets.data:
+            print("No tweets found")
+            return
+            
+        print(f"Found {len(tweets.data)} tweets")
         
         # Format tweets for README
         tweet_lines = []
-        for tweet in tweets:
-            text = tweet.full_text
+        for tweet in tweets.data:
+            text = tweet.text
             # Clean up text
             text = re.sub(r'https://\S+', '', text)
             text = re.sub(r'@\w+', '', text)
