@@ -1,12 +1,14 @@
 import os
 import tweepy
 import re
+import time
 
 def update_readme_with_tweets():
     try:
         # Use Bearer Token authentication
         client = tweepy.Client(
-            bearer_token=os.environ['TWITTER_BEARER_TOKEN']
+            bearer_token=os.environ['TWITTER_BEARER_TOKEN'],
+            wait_on_rate_limit=True  # Auto-wait when rate limited
         )
         
         # Get user ID by username
@@ -18,13 +20,30 @@ def update_readme_with_tweets():
         user_id = user.data.id
         print(f"Found user ID: {user_id}")
         
-        # Get tweets
-        tweets = client.get_users_tweets(
-            id=user_id,
-            max_results=5,
-            exclude=['retweets', 'replies'],
-            tweet_fields=['text', 'created_at']
-        )
+        # Add delay to avoid rate limits
+        time.sleep(2)
+        
+        # Get tweets with retry logic
+        max_retries = 3
+        retry_delay = 5
+        
+        for attempt in range(max_retries):
+            try:
+                tweets = client.get_users_tweets(
+                    id=user_id,
+                    max_results=5,
+                    exclude=['retweets', 'replies'],
+                    tweet_fields=['text', 'created_at']
+                )
+                break
+            except tweepy.TooManyRequests:
+                if attempt < max_retries - 1:
+                    print(f"Rate limited. Waiting {retry_delay} seconds...")
+                    time.sleep(retry_delay)
+                    retry_delay *= 2
+                    continue
+                else:
+                    raise
         
         if not tweets.data:
             print("No tweets found")
