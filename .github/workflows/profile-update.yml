@@ -15,7 +15,7 @@ jobs:
       - name: Fetch YouTube Videos
         uses: gautamkrishnar/blog-post-workflow@master
         with:
-          feed_list: "https://www.youtube.com/feeds/videos.xml?channel_id=UCzOwC8M97mSw6oXqFnMDX8A"
+          feed_list: "https://www.youtube.com/feeds/videos.xml?channel_id=YOUR_CHANNEL_ID"
           max_post_count: 5
           template: "- 🎥 [$title]($url)"
           comment_tag_name: "YOUTUBE-VIDEOS"
@@ -33,4 +33,7 @@ jobs:
           TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
           TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
           TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
-        run: python .github/scripts/update_tweets.py
+        run: |
+          ls -la
+          pwd
+          python scripts/update_tweets.py
