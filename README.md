@@ -1,12 +1,10 @@
 # 👋 Hey, I'm Sam
 
-I'm a designer-developer who loves building clean, fast, and useful web things.
+👋 I’m Sam — a designer & developer who builds simple, thoughtful web products.
 
-- 🛠 I turn ideas into working products — fast.
-- 🧠 I write about AI, design, and indie hacking.
-- 💡 Always chasing that sweet spot between simple and smart.
-
-This is my GitHub profile — a mix of experiments, tools, and whatever I'm curious about at the moment.
+🛠 I turn ideas into working tools and experiments, fast.
+🧠 I share what I learn about design, AI, and building online.
+📂 This repo is a mix of prototypes, side projects, and things I’m curious about.
 
 ## 💬 Elsewhere
 
