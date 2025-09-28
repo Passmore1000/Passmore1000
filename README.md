@@ -1,10 +1,7 @@
 # 👋 Hey, I'm Sam
 
-👋 I’m Sam — a designer & developer who builds simple, thoughtful web products.
+👋 I’m Sam — a designer & developer who builds simple, thoughtful experiences
 
-🛠 I turn ideas into working tools and experiments, fast.
-🧠 I share what I learn about design, AI, and building online.
-📂 This repo is a mix of prototypes, side projects, and things I’m curious about.
 
 ## 💬 Elsewhere
 
