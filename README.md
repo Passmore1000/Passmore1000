@@ -9,8 +9,8 @@
 ## 💬 Elsewhere
 
 - Website: www.itssam.io
-- Twitter: https://x.com/itssambuilds
-- YouTube: https://www.youtube.com/@itssambuilds
+- Twitter: https://x.com/samrpassmore
+- YouTube: https://www.youtube.com/@samrpassmore
 - Email: hello@itssam.io
 
 ---
