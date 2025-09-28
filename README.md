@@ -1,6 +1,6 @@
 # 👋 Hey, I'm Sam
 
-👋 I’m Sam — a designer & developer who builds simple, thoughtful experiences
+Designer first, builder second. I work at the intersection of design and development, exploring how code, prototypes, and systems can bring clarity to ideas. My method is sprint-driven: iterate quickly, refine constantly, and build things that just work.
 
 
 ## 💬 Elsewhere
